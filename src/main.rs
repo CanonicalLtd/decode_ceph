@@ -10,11 +10,6 @@ extern crate time;
 extern crate users;
 
 use ceph::sniffer::*;
-// use ceph::sniffer::serial::*;
-// use ceph::sniffer::crypto::*;
-// use ceph::sniffer::mon_decode::*;
-// use ceph::sniffer::common_decode::*;
-// use ceph::sniffer::osd_decode::*;
 
 use pcap::{Capture, Device};
 
@@ -32,40 +27,36 @@ use output_args::*;
 mod tests{
     extern crate output_args;
     extern crate pcap;
+    extern crate log;
 
-    // use std::io::Cursor;
-    // use std::net::Ipv4Addr;
     use std::path::Path;
     use pcap::Capture;
-    // use output_args::*;
-    // use super::serial;
+    use super::ceph::sniffer::*;
 
     #[test]
     fn test_pcap_parsing(){
-        // let args = output_args::Args {
-        //     carbon: None,
-        //     elasticsearch: None,
-        //     stdout: Some("stdout".to_string()),
-        //     influx: None,
-        //     outputs: vec!["elasticsearch".to_string(), "carbon".to_string(), "stdout".to_string()],
-        //     config_path: "".to_string(),
-        //     log_level: log::LogLevel::Info
-        // };
+        let args = output_args::Args {
+            carbon: None,
+            elasticsearch: None,
+            stdout: Some("stdout".to_string()),
+            influx: None,
+            outputs: vec!["stdout".to_string()],
+            config_path: "".to_string(),
+            log_level: log::LogLevel::Info
+        };
         //Set the cursor so the parsing doesn't fail
         let mut cap = Capture::from_file(Path::new("ceph.pcap")).unwrap();
-        /*
+        //We received a packet
         while let Ok(packet) = cap.next() {
             match serial::parse_ceph_packet(&packet.data) {
-                nom::IResult::Done(_, result) => {
-                    println!("logging {:?}", result);
-                    // let _ = super::process_packet(&result.header, &result.ceph_message, &args);
+                Some(result) => {
+                    trace!("logging {:?}", result);
+                    let _ = super::process_packet(&result.header, &result.ceph_message, &args);
                 },
-                nom::IResult::Incomplete(i) => println!("Incomplete: {:?}: {:?}", i, packet),
-                nom::IResult::Error(e) => println!("Error parsing; {:?}", e),
-                // _ => trace!("Error while parsing packet")
-            }
+                _ => {},
+            };
+            // break
         }
-        */
     }
 }
 
@@ -244,7 +235,7 @@ fn log_msg_to_influx(header: &serial::PacketHeader, msg: &serial::Message, outpu
         let client = create_client(credentials, hosts);
 
         let src_addr = header.src_addr.ip_address();
- 
+
         let dst_addr = header.dst_addr.ip_address();
 
         let _ = match *msg{
