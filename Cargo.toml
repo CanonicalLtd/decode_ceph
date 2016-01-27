@@ -1,10 +1,11 @@
 [package]
 name = "decode_ceph"
-version = "1.0.0"
+version = "1.0.1"
 authors = ["Chris Holcombe <xfactor973@gmail.com>", "Chris MacNaughton <chmacnaughton@gmail.com>"]
 
 [dependencies]
-ceph = {git = "https://github.com/ChrisMacNaughton/ceph-rs.git"}
+#ceph = {git = "https://github.com/ChrisMacNaughton/ceph-rs.git"}
+ceph = {path = "/home/chris/repos/ceph-rs"}
 # bitflags = "*"
 # byteorder = "*"
 # crc = "*"
