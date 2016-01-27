@@ -5,7 +5,6 @@ authors = ["Chris Holcombe <xfactor973@gmail.com>", "Chris MacNaughton <chmacnau
 
 [dependencies]
 ceph = {git = "https://github.com/ChrisMacNaughton/ceph-rs.git"}
-# ceph = {path = "/home/chris/repos/ceph-rs"}
 log = "*"
 pcap = "*"
 simple_logger = "*"
