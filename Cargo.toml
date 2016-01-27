@@ -4,24 +4,13 @@ version = "1.0.1"
 authors = ["Chris Holcombe <xfactor973@gmail.com>", "Chris MacNaughton <chmacnaughton@gmail.com>"]
 
 [dependencies]
-#ceph = {git = "https://github.com/ChrisMacNaughton/ceph-rs.git"}
-ceph = {path = "/home/chris/repos/ceph-rs"}
-# bitflags = "*"
-# byteorder = "*"
-# crc = "*"
-# ease = "*"
-# enum_primitive = "*"
+ceph = {git = "https://github.com/ChrisMacNaughton/ceph-rs.git"}
+# ceph = {path = "/home/chris/repos/ceph-rs"}
 log = "*"
-# nom = "*"
-# num = "*"
 pcap = "*"
-# rand = "*"
-# rust-crypto = "*"
-# rustc-serialize = "*"
 simple_logger = "*"
 time = "*"
 users = "*"
-# uuid = "*"
 influent = "0.2"
 output_args = {git = "https://github.com/ChrisMacNaughton/ceph_cli_args.git"}
 
