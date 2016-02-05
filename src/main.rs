@@ -198,7 +198,7 @@ fn log_msg_to_stdout(header: &serial::PacketHeader, msg: &serial::Message, outpu
 }
 
 fn setup_osd_op(src_addr: String, dst_addr: String, op: &serial::CephOsdOperation, client: &Client) {
-    let size = op.operation.size as f64;
+    let size = op.operation.extent_length as f64;
     let count = op.operation_count as i64;
     let flags: String = format!("{:?}", op.flags).clone();
 
@@ -252,11 +252,9 @@ fn log_msg_to_influx(header: &serial::PacketHeader, msg: &serial::Message, outpu
 
 fn process_packet(header: &serial::PacketHeader, msg: &serial::CephMsgrMsg, output_args: &Args)->Result<(),String>{
     //Process OSD operation packets
-    for ceph_msg in msg.messages.iter(){
-        let _ = log_msg_to_carbon(&header, &ceph_msg, output_args);
-        let _ = log_msg_to_stdout(&header, &ceph_msg, output_args);
-        let _ = log_msg_to_influx(&header, &ceph_msg, output_args);
-    }
+    let _ = log_msg_to_carbon(&header, &msg.message, output_args);
+    let _ = log_msg_to_stdout(&header, &msg.message, output_args);
+    let _ = log_msg_to_influx(&header, &msg.message, output_args);
     Ok(())
 }
 
