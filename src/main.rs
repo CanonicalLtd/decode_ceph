@@ -34,7 +34,15 @@ mod tests{
     use super::ceph::sniffer::*;
 
     #[test]
+<<<<<<< HEAD
+    fn test_bogus_pr(){
+        assert_eq!(1,0);
+    }
+    #[test]
+    fn test_bogus_pr_2(){
+=======
     fn fail(){
+>>>>>>> fc99a5dd89517f999c0be2bb36eee67af8c05827
         assert_eq!(1,0);
     }
 
