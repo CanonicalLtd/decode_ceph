@@ -37,6 +37,10 @@ mod tests{
     fn test_bogus_pr(){
         assert_eq!(1,0);
     }
+    #[test]
+    fn test_bogus_pr_2(){
+        assert_eq!(1,0);
+    }
 
     #[test]
     fn test_pcap_parsing(){
