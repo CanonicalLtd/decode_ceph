@@ -34,11 +34,6 @@ mod tests{
     use super::ceph::sniffer::*;
 
     #[test]
-    fn fail(){
-        assert_eq!(1,0);
-    }
-
-    #[test]
     fn test_pcap_parsing(){
         let args = output_args::Args {
             carbon: None,
